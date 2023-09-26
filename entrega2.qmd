@@ -1,17 +1,25 @@
-library("tidyverse")
-df = mpg
-
-#P1
+---
+title: "entrega_graficos"
+format: html
+editor: visual
+---
+Ejercicio 1:
+```{r}
 df %>% ggplot(aes(x = manufacturer)) + geom_bar(fill = "deepskyblue4") + 
   labs(x = "Manufacturador", y = "Número de vehículos") + theme_grey() + 
   theme(axis.text = element_text(size=8), axis.title = element_text(size=15, face="bold"))
-#P2
+```
+
+Ejercicio 2:
+```{r}
 df %>% ggplot(aes(x = class, y = cty)) + geom_boxplot(col = "deepskyblue") + 
   geom_jitter(color = "indianred1", alpha = 0.5) + labs(x = "Clase de vehículo",
                                             y = "Rendimiento en ciudad") + 
   theme_grey() + theme(axis.text = element_text(size=8),
                        axis.title = element_text(size=15, face="bold"))
-#P3
+```
+Ejercicio 3:
+```{r}
 df %>% ggplot(aes(x = class, y = cty, fill = drv)) + geom_boxplot() + 
   geom_jitter(aes(color = drv)) + scale_color_hue(l=75) + labs(x = "Clase de vehículo",
                                             y = "Rendimiento en ciudad") + 
@@ -20,7 +28,9 @@ df %>% ggplot(aes(x = class, y = cty, fill = drv)) + geom_boxplot() +
                        legend.title = element_text(size=15, face="bold")) + 
   scale_fill_discrete(name = "Tracción", breaks = c("4", "f", "r"), labels = c("4 ruedas", "Delantera", "Trasera")) + 
   scale_colour_manual(values=c("#FF2222", "#66FF66", "#22FFFF"), name = "Tracción", breaks = c("4", "f", "r"), labels = c("4 ruedas", "Delantera", "Trasera"))
-#P4
+```
+Ejercicio 4:
+```{r}
 df %>% mutate(cyl = as.factor(cyl))
 df %>% mutate(cyl = as.factor(cyl)) %>% ggplot(aes(x = class, y = hwy, fill = cyl)) + 
   geom_boxplot() + scale_color_hue(l=50, c=30) + 
@@ -29,7 +39,13 @@ df %>% mutate(cyl = as.factor(cyl)) %>% ggplot(aes(x = class, y = hwy, fill = cy
                                                        axis.title = element_text(size=15, face="bold"),
                                                        legend.title = element_text(size=15, face="bold")) + 
   scale_fill_discrete(name = "Cilindrada") + scale_colour_manual(values=c("#FF2222", "#66FF66", "#22FFFF", "#FF22FF"), name = "Cilindrada")
-#P5
+```
+Podemos observar que independientemente del tipo de vehículo a mayor cilindrada menor rendimiento en carretera, una excepción son los coches biplaza que por su pequeño tamaño a pesar de tener 8 cilindros tienen un buen rendimiento. 
+Por otro lado a mayor tamaño del vehículo menor rendimiento como por ejemplo en las pickup y los suv.
+Concluimos que la mejor opción para maximizar el rendimiento en carretera parece ser un subcompact de 4 cilindros.
+
+Ejercicio 5:
+```{r}
 ggplot(data = df, aes(x = cty)) +
   geom_histogram(aes(fill = drv), 
                  alpha = 1, 
@@ -45,4 +61,6 @@ ggplot(data = df, aes(x = cty)) +
         legend.title = element_text(size=10)) + 
   scale_fill_discrete(name = "Tracción", breaks = c("4", "f", "r"), labels = c("4 ruedas", "Tracción Delantera", "Tracción Trasera"))
   
- 
+```
+
+Podemos observar que para ciudad la mejor opción para ahorrar gasolina se trata de tracción delantera, debido a que la mayoría de los coches igualan o superan a la tracción en 4 cuatro ruedas y tracción trasera.Por otro lado la tracción a 4 ruedas y la tracción trasera se comportan de manera similar. cabe destacar que tenemos muchos menos datos de tracción trasera que del resto.
