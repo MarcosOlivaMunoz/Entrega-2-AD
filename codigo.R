@@ -29,3 +29,18 @@ df %>% mutate(cyl = as.factor(cyl)) %>% ggplot(aes(x = class, y = hwy, fill = cy
                                                        legend.title = element_text(size=15, face="bold")) + 
   scale_fill_discrete(name = "Cilindrada") + scale_colour_manual(values=c("#FF2222", "#66FF66", "#22FFFF", "#FF22FF"), name = "Cilindrada")
 #P5
+ggplot(data = df, aes(x = cty)) +
+  geom_histogram(aes(fill = drv), 
+                 alpha = 3, 
+                 position = "identity",
+                 na.rm = TRUE) +
+  facet_grid(.~drv) +
+  labs(x = "millas por galón en ciudad",
+       y = "Frecuencia absoluta") +
+  guides(fill = guide_legend(title = "Tipo de tracción")) +
+  theme_bw() +
+  theme(axis.text = element_text(size=10),
+        axis.title = element_text(size=10, face = "bold"),
+        legend.title = element_text(size=10)) + 
+  scale_fill_discrete(name = "Tracción", breaks = c("4", "f", "r"), labels = c("4 ruedas", "Tracción Delantera", "Tracción Trasera")) 
+ 
