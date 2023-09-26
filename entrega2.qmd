@@ -13,7 +13,7 @@ df %>% ggplot(aes(x = manufacturer)) + geom_bar(fill = "deepskyblue4") +
 Ejercicio 2:
 ```{r}
 df %>% ggplot(aes(x = class, y = cty)) + geom_boxplot(col = "deepskyblue") + 
-  geom_jitter(color = "indianred1", alpha = 0.5) + labs(x = "Clase de vehículo",
+  geom_jitter(color = "indianred1", alpha = 1) + labs(x = "Clase de vehículo",
                                             y = "Rendimiento en ciudad") + 
   theme_grey() + theme(axis.text = element_text(size=8),
                        axis.title = element_text(size=15, face="bold"))
